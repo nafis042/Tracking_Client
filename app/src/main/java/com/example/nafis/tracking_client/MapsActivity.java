@@ -227,7 +227,7 @@ public class MapsActivity extends FragmentActivity implements
 
         @Override
         protected String doInBackground(String... params) {
-
+/*
                String data="";
             HttpURLConnection httpURLConnection = null;
             try {
@@ -249,6 +249,9 @@ public class MapsActivity extends FragmentActivity implements
                     httpURLConnection.disconnect();
                 }
             }
+*/
+
+
 
             JSONObject post_data=new JSONObject();
             // JSONArray array=new JSONArray();
@@ -259,12 +262,13 @@ public class MapsActivity extends FragmentActivity implements
                 e.printStackTrace();
             }
 
-            httpURLConnection = null;
+            HttpURLConnection httpURLConnection = null;
+            int res=0;
             try {
 
-                httpURLConnection = (HttpURLConnection) new URL("http://35.162.206.1:3000/table07").openConnection();
+                httpURLConnection = (HttpURLConnection) new URL("http://35.162.206.1:3000/table07/2").openConnection();
                 Log.i("Insert","insert starts");
-                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setRequestMethod("PUT");
                 httpURLConnection.setRequestProperty("Content-Type", "application/json");
                 httpURLConnection.setRequestProperty("Accept", "application/json");
                 httpURLConnection.setDoOutput(true);
@@ -274,7 +278,8 @@ public class MapsActivity extends FragmentActivity implements
                 wr.writeBytes(post_data.toString());
                 wr.flush();
                 wr.close();
-                String dataa="";
+                res=httpURLConnection.getResponseCode();
+              /*  String dataa="";
                 InputStream in = httpURLConnection.getInputStream();
                 InputStreamReader inputStreamReader = new InputStreamReader(in);
 
@@ -283,7 +288,7 @@ public class MapsActivity extends FragmentActivity implements
                     char current = (char) inputStreamData;
                     inputStreamData = inputStreamReader.read();
                     dataa += current;
-                }
+                }*/
                 Log.i("Insert","Insert finished");
 
             } catch (Exception e) {
@@ -294,7 +299,10 @@ public class MapsActivity extends FragmentActivity implements
                 }
             }
 
-            return data;
+            return String.valueOf(res);
+
+
+
         }
 
         @Override
