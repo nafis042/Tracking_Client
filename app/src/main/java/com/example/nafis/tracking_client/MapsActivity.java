@@ -264,6 +264,7 @@ public class MapsActivity extends FragmentActivity implements
 
             HttpURLConnection httpURLConnection = null;
             int res=0;
+            ////////////////////
             try {
 
                 httpURLConnection = (HttpURLConnection) new URL("http://35.162.206.1:3000/table07/2").openConnection();
